@@ -4,7 +4,7 @@ import csv
 filetoload=os.path.join("Resources","election_data.csv")
 
 totalvotes=0
-canidates={}
+candidates={}
 percentwon=[]
 totalvoteswon=[]
  
@@ -15,18 +15,18 @@ with open(filetoload) as csvfile:
     csv_header=next(csvreader)
     for c1,c2,c3 in csvreader:
         totalvotes += 1
-        if c3 in canidates:
-            canidates[c3] += 1
+        if c3 in candidates:
+            candidates[c3] += 1
         else:
-            canidates[c3] = 1
+            candidates[c3] = 1
 
 print("\ncleElection Results")
 print("-------------------")
 print(f"Total Votes: {totalvotes}")
 print("-------------------")
-winner= list(canidates.keys())[0]
-for name, votes in canidates.items() :
-    if votes> canidates[winner]:
+winner= list(candidates.keys())[0]
+for name, votes in candidates.items() :
+    if votes> candidates[winner]:
         winner=name
     print(f"{name}: {votes/totalvotes:.3%} ({votes})")
 print("-------------------")
@@ -38,9 +38,9 @@ with open('./analysis/pypollresults.txt','w') as f:
     print("-------------------",file=f)
     print(f"Total Votes: {totalvotes}",file=f)
     print("-------------------",file=f)
-    winner= list(canidates.keys())[0]
-    for name, votes in canidates.items() :
-        if votes> canidates[winner]:
+    winner= list(candidates.keys())[0]
+    for name, votes in candidates.items() :
+        if votes> candidates[winner]:
             winner=name
         print(f"{name}: {votes/totalvotes:.3%} ({votes})",file=f)
     print("-------------------",file=f)
